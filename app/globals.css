@@ -1,0 +1,103 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Custom Flicker Animation */
+@keyframes cyber-flicker {
+  0%, 100% { opacity: 1; }
+  10%, 30%, 50%, 70%, 90% { opacity: 0.9; }
+  20%, 40%, 60%, 80% { opacity: 0.6; }
+}
+
+.flicker-on-click:active {
+  animation: cyber-flicker 0.3s ease-in-out;
+}
+
+/* Glowing Prompt Inputs */
+input[type="text"],
+textarea {
+  background-color: rgba(10, 10, 10, 0.7);
+  color: #00f7ff;
+  border: 1px solid #00f7ff;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  outline: none;
+  box-shadow: 0 0 12px #00f7ff80, 0 0 4px #ff00ff50;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  box-shadow: 0 0 25px #00f7ffcc, 0 0 12px #ff00ffaa, 0 0 8px #39ff14cc;
+  transform: scale(1.02);
+}
+
+/* Neon Text Gradients */
+.neon-text {
+  background: linear-gradient(to right, #ff00ff, #00f7ff, #39ff14);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Tailwind Theme Variable Mappings */
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Base Theme - Cyberpunk Colors */
+:root {
+  --radius: 0.625rem;
+  --background: #07010f;
+  --foreground: #00f7ff;
+  --card: #130020;
+  --card-foreground: #ff00ff;
+  --popover: #130020;
+  --popover-foreground: #ff00ff;
+  --primary: #ff00ff;
+  --primary-foreground: #000000;
+  --secondary: #39ff14;
+  --secondary-foreground: #000000;
+  --border: #00f7ff;
+  --ring: #ff00ff;
+}
+
+/* Dark Theme - Glowing High Contrast */
+.dark {
+  --background: #07010f;
+  --foreground: #00f7ff;
+  --card: #1a0033;
+  --card-foreground: #ff00ff;
+  --popover: #1a0033;
+  --popover-foreground: #ff00ff;
+  --primary: #ff00ff;
+  --primary-foreground: #000000;
+  --secondary: #39ff14;
+  --secondary-foreground: #000000;
+  --border: #00f7ff;
+  --ring: #ff00ff;
+}
+
+@layer base {
+  * {
+    @apply outline outline-1 outline-cyan-500/50;
+  }
+
+  body {
+    @apply text-foreground;
+    background: linear-gradient(145deg, #0a0a0a, #1a0033, #0f001f, #1c002f);
+    background-size: 400% 400%;
+    animation: bgShift 20s ease infinite;
+    font-family: var(--font-sans), sans-serif;
+  }
+}
+
+/* Background gradient animation */
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
